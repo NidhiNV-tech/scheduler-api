@@ -1,26 +1,29 @@
 package main
 
 import (
+	
 	"context"
 	"encoding/json"
 	"log"
 	"net/http"
 	
+	"github.com/nidhinvtech/scheduler-api/helper"
+	"github.com/nidhinvtech/scheduler-api/models"
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 //Connection mongoDB with helper class
-collection := helper.ConnectDB()
+var collection = helper.ConnectDB()
 func main() {
 	//Init Router
 	r := mux.NewRouter()
 
   	// arrange our route
 	r.HandleFunc("/meeting/{id}", getMeeting).Methods("GET")
-	// r.HandleFunc("/meetings", getMeetingForTime).Queries("starttime","{starttime}").Methods("GET")
+	r.HandleFunc("/meetings", getMeetingForTime).Methods("GET")
 	r.HandleFunc("/meetings", scheduleMeeting).Methods("POST")
-	r.HandleFunc("/meetings", getMeetingForParticipant).Queries("email","{email}").Methods("GET")
+	// r.HandleFunc("/meetings", getMeetingForParticipant).Queries("email","{email}").Methods("GET")
 	
 
   	// set our port address

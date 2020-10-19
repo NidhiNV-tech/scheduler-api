@@ -8,7 +8,7 @@ type Meeting struct {
 	StartTime    string             `json:"starttime,omitempty" bson:"starttime,omitempty"`
 	EndTime      string             `json:"endtime" bson:"endtime,omitempty"`
 	Timestamp    string             `json:"timestamp" bson:"timestamp,omitempty"`
-	Participants *Participants      `json:"participants" bson:"participants,omitempty"`
+	Participant *Participant     `json:"participant" bson:"participants,omitempty"`
 }
 
 type Participant struct {

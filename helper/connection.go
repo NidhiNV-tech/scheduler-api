@@ -7,16 +7,19 @@ import (
 	"log"
 	"net/http"
 
+    
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
+
+
 
 // ConnectDB : This is helper function to connect mongoDB
 // If you want to export your function. You must to start upper case function name. Otherwise you won't see your function when you import that on other class.
 func ConnectDB() *mongo.Collection {
 
 	// Set client options
-	clientOptions := options.Client().ApplyURI("your_cluster_endpoint")
+	clientOptions := options.Client().ApplyURI("mongodb+srv://nidhinvtech:YV6ocnTEtn5Fpec7@cluster0.uxdwl.mongodb.net/nidhinvtech?retryWrites=true&w=majority")
 
 	// Connect to MongoDB
 	client, err := mongo.Connect(context.TODO(), clientOptions)
@@ -27,7 +30,7 @@ func ConnectDB() *mongo.Collection {
 
 	fmt.Println("Connected to MongoDB!")
 
-	collection := client.Database("go_rest_api").Collection("meeting")
+	collection := client.Database("scheduler-api").Collection("meeting")
 
 	return collection
 }
@@ -53,3 +56,5 @@ func GetError(err error, w http.ResponseWriter) {
 	w.WriteHeader(response.StatusCode)
 	w.Write(message)
 }
+
+
